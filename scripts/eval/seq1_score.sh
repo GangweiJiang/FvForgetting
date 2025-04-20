@@ -1,0 +1,21 @@
+exp_name=$1
+adapter_path=$2
+cuda=$3
+
+model=llama-chat
+
+# seq1
+data1=ni195  
+data2=ni1343
+data3=ni1310
+data4=ni1292
+data5=ni363
+
+
+
+concatdata=${data1}_test,${data2}_test,${data3}_test,${data4}_test,${data5}_test
+
+
+bash scripts/eval_model.sh ${cuda} ${model} \
+    ${concatdata}  ./results/${exp_name} \
+    "--adapter_name_or_path ${adapter_path} --exp_name train_f5 --prefixes_type N --separators_type N  --max_eval_size 110  --generate_str"
